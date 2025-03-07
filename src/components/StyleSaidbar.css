@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+.scrollbar-custom {
+  scrollbar-width: 12px;
+  scrollbar-color: #750000;
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 12px;
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: #750000;
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 10px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+}
+.payment-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: inset 0px 8px 20px rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
