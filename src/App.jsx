@@ -3,7 +3,6 @@ import { Filter, Home, Navbar, Wishlist } from './components';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import {
 	setError,
 	setIsLoading,
@@ -14,10 +13,35 @@ import {
 import productsService from './service/products';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFromLocal, setToLocal } from './lib/ls';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import { setUsers, setCurrentUser } from './lib/slices/userSlice';
 
 const App = () => {
 	const { wishlist, cart } = useSelector(state => state.products);
+	const { users, currentUser } = useSelector(state => state.user)
 	const dispatch = useDispatch();
+
+	// login-register
+	useEffect(() => {
+		const storedUsers = getFromLocal('users')
+		if (storedUsers) {
+			dispatch(setUsers(storedUsers))
+		}
+
+		const storedCurrentUser = getFromLocal('currentUser')
+		if (storedCurrentUser) {
+			dispatch(setCurrentUser(storedCurrentUser))
+		}
+	}, [dispatch])
+
+	useEffect(() => {
+		setToLocal('user', users)
+	}, [users])
+
+	useEffect(() => {
+		setToLocal('currentUser', currentUser)
+	}, [currentUser])
 
 	useEffect(() => {
 		const getProducts = async () => {
@@ -59,6 +83,8 @@ const App = () => {
 				<Route path='/' element={<Home />} />
 				<Route path='/filter/:q' element={<Filter />} />
 				<Route path='/wishlist' element={<Wishlist />} />
+				<Route path="/signup" element={<SignUp />} />
+				<Route path="/login" element={<Login />} />
 			</Routes>
 			<ToastContainer
 				position="top-center"
